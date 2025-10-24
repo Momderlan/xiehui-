@@ -156,20 +156,3 @@
   font-size: 30rpx;
 }
 
-/* 图标字体 */
-@font-face {
-  font-family: 'iconfont';
-  src: url('data:font/woff2;charset=utf-8;base64,d09GMgABAAAAAAOMAAsAAAAAB8AAAANAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDHAqCYIJGATYCJAMQCwoABCAFhGcHSRuFBhHVm1PIfhbYMbxBKKUYHQiCiKBqzez+7gEPEAQVG6p8lESjJLrR6FYa3ahGIlskEt1K0hAplXA53SuQdmGdWhGhO/+5fPr/Qyx5tjWXrDFoDBoHeLRBA7SBDXRADvxD/jL8xV16mUC7cT3EgZFJeUBFYY0KxLmzMwFUGJepQg3VoVJzMIvHoKqmG8YW8Aj/Pv6jFVQkdRnrxNOzEwYy/pz9XIeZ/n+6STeA358JaBtZswCFOK4NHVAFiVmodoFPDQFfVZL4c/Zz3ef6/6/YsyORpvaPFyJpzNYGbIKKmfhzVhIEn+uSIPhcLwkKn+tPQtWQdrSjA3iGiPzhi7SQ8UUq8CGlROTd3Aw+3N0dTCZra1uG/djFaVeoFgvsxzKcpnEYG9PpztHpztLpLjMYrjAYJI0GSfZPmUx3xFQ+w7y8mDMzmXNz6XNzaZIOvbiYt7iYv7RUwGrEQjazkLVEDAwMC8Tw8MjQ0Mjw8AhXVOQSCt0CgWsgALmCcFGRRyj0CoUeocgrFLvFYp9Y7BWJ/CKxTyTyi8UBsdjHF/t4Yi9P7OeJfTxxgCcO8sQBvtjPFwd4Yj9P7OWJg2KJTyIJSiQhqSQslUSkkpBUEpBK/FKJT');
-}
-
-.icon-back:before {
-  content: "\e7a7";
-}
-
-.icon-check:before {
-  content: "\e7a9";
-}
-
-.icon-close:before {
-  content: "\e7aa";
-}
