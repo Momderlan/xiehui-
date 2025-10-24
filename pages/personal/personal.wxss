@@ -1,0 +1,240 @@
+/* pages/personal/personal.wxss */
+
+.container {
+  padding: 30rpx;
+}
+
+/* 用户信息区域 */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 30rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  overflow: hidden;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.user-phone {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.user-member-level {
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+/* 我的区域通用样式 */
+.my-section {
+  margin-bottom: 30rpx;
+  padding: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-more {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999;
+}
+
+.section-content {
+  width: 100%;
+}
+
+/* 我的赛事 */
+.match-list {
+  width: 100%;
+}
+
+.match-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.match-item:last-child {
+  border-bottom: none;
+}
+
+.match-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.match-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.match-date {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.match-status {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.match-category {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 我的俱乐部 */
+.club-info {
+  padding: 20rpx 0;
+}
+
+.club-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.club-role {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.club-join-date {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 功能列表 */
+.function-section {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.function-list {
+  width: 100%;
+}
+
+.function-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.function-icon text {
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.function-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.function-arrow {
+  color: #999;
+  font-size: 24rpx;
+}
+
+/* 无数据提示 */
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 图标字体 */
+@font-face {
+  font-family: 'iconfont';
+  src: url('data:font/woff2;charset=utf-8;base64,d09GMgABAAAAAAOMAAsAAAAAB8AAAANAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDHAqCYIJGATYCJAMQCwoABCAFhGcHSRuFBhHVm1PIfhbYMbxBKKUYHQiCiKBqzez+7gEPEAQVG6p8lESjJLrR6FYa3ahGIlskEt1K0hAplXA53SuQdmGdWhGhO/+5fPr/Qyx5tjWXrDFoDBoHeLRBA7SBDXRADvxD/jL8xV16mUC7cT3EgZFJeUBFYY0KxLmzMwFUGJepQg3VoVJzMIvHoKqmG8YW8Aj/Pv6jFVQkdRnrxNOzEwYy/pz9XIeZ/n+6STeA358JaBtZswCFOK4NHVAFiVmodoFPDQFfVZL4c/Zz3ef6/6/YsyORpvaPFyJpzNYGbIKKmfhzVhIEn+uSIPhcLwkKn+tPQtWQdrSjA3iGiPzhi7SQ8UUq8CGlROTd3Aw+3N0dTCZra1uG/djFaVeoFgvsxzKcpnEYG9PpztHpztLpLjMYrjAYJI0GSfZPmUx3xFQ+w7y8mDMzmXNz6XNzaZIOvbiYt7iYv7RUwGrEQjazkLVEDAwMC8Tw8MjQ0Mjw8AhXVOQSCt0CgWsgALmCcFGRRyj0CoUeocgrFLvFYp9Y7BWJ/CKxTyTyi8UBsdjHF/t4Yi9P7OeJfTxxgCcO8sQBvtjPFwd4Yj9P7OWJg2KJTyIJSiQhqSQslUSkkpBUEpBK/FKJT');
+}
+
+.icon-arrow:before {
+  content: "\e7a8";
+}
+
+.icon-member:before {
+  content: "\e7ae";
+}
+
+.icon-match:before {
+  content: "\e7b1";
+}
+
+.icon-club:before {
+  content: "\e7af";
+}
+
+.icon-notification:before {
+  content: "\e7b0";
+}
+
+.icon-setting:before {
+  content: "\e7ab";
+}

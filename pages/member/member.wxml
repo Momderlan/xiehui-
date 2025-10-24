@@ -1,0 +1,76 @@
+<!--pages/member/member.wxml-->
+<view class="container">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="onBackTap">
+    <text class="iconfont icon-back"></text>
+  </view>
+
+  <!-- 页面标题 -->
+  <view class="page-title">会员专区</view>
+
+  <!-- 会员状态 -->
+  <view class="member-status card">
+    <block wx:if="{{hasMember}}">
+      <view class="status-title">您当前的会员状态</view>
+      <view class="status-content">
+        <view class="status-level" style="color: {{themeColor}}">{{memberInfo.level}}</view>
+        <view class="status-info">
+          <view class="info-item">
+            <text class="info-label">到期时间：</text>
+            <text class="info-value">{{memberInfo.expireDate}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">会员积分：</text>
+            <text class="info-value">{{memberInfo.points}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="status-title">您还不是会员</view>
+      <view class="status-desc">成为会员即可享受专属优惠和服务</view>
+    </block>
+  </view>
+
+  <!-- 功能按钮 -->
+  <view class="function-container">
+    <button 
+      class="btn btn-primary function-btn" 
+      bindtap="onApplyTap"
+    >
+      {{hasMember ? '会员续费/升级' : '申请成为会员'}}
+    </button>
+    
+    <button 
+      class="btn btn-outline function-btn" 
+      bindtap="onViewInfoTap"
+      disabled="{{!hasMember}}"
+    >
+      查看会员信息
+    </button>
+  </view>
+
+  <!-- 会员等级介绍 -->
+  <view class="level-container">
+    <view class="section-title">会员等级介绍</view>
+    <view class="level-list">
+      <block wx:for="{{memberLevels}}" wx:key="id">
+        <view class="level-item card">
+          <view class="level-header">
+            <view class="level-name" style="color: {{themeColor}}">{{item.name}}</view>
+            <view class="level-fee">{{item.fee}}</view>
+          </view>
+          <view class="level-benefits">
+            <view class="benefit-title">会员权益：</view>
+            <view class="benefit-list">
+              <view class="benefit-item" wx:for="{{item.benefits}}" wx:for-item="benefit" wx:key="*this">
+                <text class="iconfont icon-check" style="color: {{themeColor}}"></text>
+                <text>{{benefit}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

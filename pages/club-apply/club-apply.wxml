@@ -1,0 +1,136 @@
+<!--pages/club-apply/club-apply.wxml-->
+<view class="container">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="onBackTap">
+    <text class="iconfont icon-back"></text>
+  </view>
+
+  <!-- 页面标题 -->
+  <view class="page-title">俱乐部申请</view>
+
+  <!-- 申请说明 -->
+  <view class="intro-section card">
+    <view class="section-title">申请说明</view>
+    <view class="intro-content">
+      <view class="intro-text">
+        欢迎申请成为我们的合作俱乐部！成为合作俱乐部后，您将获得以下权益：
+      </view>
+      <view class="benefit-list">
+        <view class="benefit-item">
+          <text class="iconfont icon-check" style="color: {{themeColor}}"></text>
+          <text>平台资源支持与推广</text>
+        </view>
+        <view class="benefit-item">
+          <text class="iconfont icon-check" style="color: {{themeColor}}"></text>
+          <text>专业赛事组织与策划</text>
+        </view>
+        <view class="benefit-item">
+          <text class="iconfont icon-check" style="color: {{themeColor}}"></text>
+          <text>会员资源共享</text>
+        </view>
+        <view class="benefit-item">
+          <text class="iconfont icon-check" style="color: {{themeColor}}"></text>
+          <text>专业培训与指导</text>
+        </view>
+        <view class="benefit-item">
+          <text class="iconfont icon-check" style="color: {{themeColor}}"></text>
+          <text>装备优惠与支持</text>
+        </view>
+      </view>
+      <view class="intro-text">
+        请点击下方按钮填写申请信息，我们将在3-5个工作日内审核并与您联系。
+      </view>
+    </view>
+  </view>
+
+  <!-- 申请按钮 -->
+  <view class="apply-btn-container" wx:if="{{!showForm}}">
+    <button class="btn btn-primary apply-btn" bindtap="showApplyForm">立即申请</button>
+  </view>
+
+  <!-- 申请表单 -->
+  <view class="form-container card" wx:if="{{showForm}}">
+    <view class="form-header">
+      <view class="form-title">俱乐部申请表</view>
+      <view class="form-close" bindtap="hideApplyForm">
+        <text class="iconfont icon-close"></text>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">俱乐部名称</view>
+      <input 
+        class="form-input" 
+        type="text" 
+        placeholder="请输入俱乐部名称" 
+        value="{{formData.clubName}}" 
+        bindinput="onInput" 
+        data-field="clubName"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">联系人</view>
+      <input 
+        class="form-input" 
+        type="text" 
+        placeholder="请输入联系人姓名" 
+        value="{{formData.contactPerson}}" 
+        bindinput="onInput" 
+        data-field="contactPerson"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">联系电话</view>
+      <input 
+        class="form-input" 
+        type="number" 
+        placeholder="请输入联系电话" 
+        value="{{formData.phone}}" 
+        bindinput="onInput" 
+        data-field="phone"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">电子邮箱（选填）</view>
+      <input 
+        class="form-input" 
+        type="text" 
+        placeholder="请输入电子邮箱" 
+        value="{{formData.email}}" 
+        bindinput="onInput" 
+        data-field="email"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">俱乐部地址</view>
+      <textarea 
+        class="form-textarea" 
+        placeholder="请输入俱乐部详细地址" 
+        value="{{formData.address}}" 
+        bindinput="onInput" 
+        data-field="address"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">俱乐部简介（选填）</view>
+      <textarea 
+        class="form-textarea" 
+        placeholder="请简要描述俱乐部情况，如成立时间、规模、特色等" 
+        value="{{formData.description}}" 
+        bindinput="onInput" 
+        data-field="description"
+      />
+    </view>
+
+    <view class="form-tips">
+      <text>注：请确保填写的信息真实有效，我们将对您的信息严格保密。</text>
+    </view>
+
+    <button class="btn btn-primary submit-btn" bindtap="onSubmit">提交申请</button>
+  </view>
+</view>

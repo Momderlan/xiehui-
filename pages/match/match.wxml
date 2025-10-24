@@ -1,0 +1,49 @@
+<!--pages/match/match.wxml-->
+<view class="container">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="onBackTap">
+    <text class="iconfont icon-back"></text>
+  </view>
+
+  <!-- 页面标题 -->
+  <view class="page-title">赛事报名</view>
+
+  <!-- 赛事列表 -->
+  <view class="match-list">
+    <block wx:for="{{matchList}}" wx:key="id">
+      <view class="match-item card">
+        <view class="match-header">
+          <image src="{{item.imageUrl}}" class="match-image" mode="aspectFill"></image>
+          <view class="match-status" style="background-color: {{item.status === '报名中' ? themeColor : '#999'}}">
+            {{item.status}}
+          </view>
+        </view>
+        <view class="match-content">
+          <view class="match-title">{{item.title}}</view>
+          <view class="match-info">
+            <view class="info-item">
+              <text class="iconfont icon-date"></text>
+              <text>日期：{{item.date}}</text>
+            </view>
+            <view class="info-item">
+              <text class="iconfont icon-location"></text>
+              <text>地点：{{item.location}}</text>
+            </view>
+            <view class="info-item">
+              <text class="iconfont icon-deadline"></text>
+              <text>报名截止：{{item.deadline}}</text>
+            </view>
+          </view>
+          <view class="match-footer">
+            <button class="btn btn-primary" bindtap="onViewDetailTap" data-id="{{item.id}}">查看详情</button>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 无数据提示 -->
+  <view class="no-data" wx:if="{{matchList.length === 0}}">
+    <text>暂无赛事信息</text>
+  </view>
+</view>

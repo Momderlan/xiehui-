@@ -1,0 +1,193 @@
+/**app.wxss**/
+page {
+  height: 100%;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+}
+
+/* 主题色 */
+.theme-color {
+  color: #AACFFF;
+}
+
+.theme-bg {
+  background-color: #AACFFF;
+}
+
+.theme-border {
+  border: 1px solid #AACFFF;
+}
+
+/* 常用布局 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+/* 常用间距 */
+.margin-top-sm {
+  margin-top: 10rpx;
+}
+
+.margin-top {
+  margin-top: 20rpx;
+}
+
+.margin-top-lg {
+  margin-top: 40rpx;
+}
+
+.margin-bottom-sm {
+  margin-bottom: 10rpx;
+}
+
+.margin-bottom {
+  margin-bottom: 20rpx;
+}
+
+.margin-bottom-lg {
+  margin-bottom: 40rpx;
+}
+
+.padding {
+  padding: 20rpx;
+}
+
+.padding-lg {
+  padding: 40rpx;
+}
+
+/* 按钮样式 */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: #AACFFF;
+  color: #fff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #AACFFF;
+  border: 1rpx solid #AACFFF;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 文本样式 */
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-small {
+  font-size: 24rpx;
+}
+
+.text-large {
+  font-size: 32rpx;
+}
+
+.text-xl {
+  font-size: 36rpx;
+}
+
+.text-gray {
+  color: #999;
+}
+
+/* 表单样式 */
+.form-group {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+/* 列表样式 */
+.list-item {
+  display: flex;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: fixed;
+  top: 20rpx;
+  left: 20rpx;
+  z-index: 999;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}

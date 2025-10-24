@@ -1,0 +1,67 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 顶部轮播图 -->
+  <view class="swiper-container">
+    <swiper 
+      indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}"
+      interval="{{interval}}"
+      duration="{{duration}}"
+      circular="{{circular}}"
+      class="swiper"
+    >
+      <block wx:for="{{swiperData}}" wx:key="id">
+        <swiper-item bindtap="onSwiperItemTap" data-id="{{item.id}}">
+          <image src="{{item.imageUrl}}" class="swiper-image" mode="aspectFill"></image>
+          <view class="swiper-title">{{item.title}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 中间功能按钮区 -->
+  <view class="function-container">
+    <view class="function-title">功能导航</view>
+    <view class="function-grid">
+      <!-- 会员专区 -->
+      <view class="function-item" bindtap="onFunctionBtnTap" data-type="member">
+        <view class="function-icon theme-bg">
+          <text class="iconfont icon-member"></text>
+        </view>
+        <view class="function-name">会员专区</view>
+      </view>
+      
+      <!-- 赛事报名 -->
+      <view class="function-item" bindtap="onFunctionBtnTap" data-type="match">
+        <view class="function-icon theme-bg">
+          <text class="iconfont icon-match"></text>
+        </view>
+        <view class="function-name">赛事报名</view>
+      </view>
+      
+      <!-- 俱乐部申请 -->
+      <view class="function-item" bindtap="onFunctionBtnTap" data-type="club">
+        <view class="function-icon theme-bg">
+          <text class="iconfont icon-club"></text>
+        </view>
+        <view class="function-name">俱乐部申请</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最新资讯 -->
+  <view class="news-container">
+    <view class="section-title">最新资讯</view>
+    <view class="news-list">
+      <block wx:for="{{swiperData}}" wx:key="id">
+        <view class="news-item" bindtap="onSwiperItemTap" data-id="{{item.id}}">
+          <image src="{{item.imageUrl}}" class="news-image" mode="aspectFill"></image>
+          <view class="news-info">
+            <view class="news-title">{{item.title}}</view>
+            <view class="news-date">2025-10-{{20 + index}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

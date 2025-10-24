@@ -1,0 +1,100 @@
+<!--pages/match-detail/match-detail.wxml-->
+<view class="container" wx:if="{{matchDetail}}">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="onBackTap">
+    <text class="iconfont icon-back"></text>
+  </view>
+
+  <!-- 赛事封面图 -->
+  <view class="match-header">
+    <image src="{{matchDetail.imageUrl}}" class="match-image" mode="aspectFill"></image>
+    <view class="match-status" style="background-color: {{matchDetail.status === '报名中' ? themeColor : '#999'}}">
+      {{matchDetail.status}}
+    </view>
+  </view>
+
+  <!-- 赛事标题 -->
+  <view class="match-title">{{matchDetail.title}}</view>
+
+  <!-- 赛事基本信息 -->
+  <view class="info-section card">
+    <view class="section-title">基本信息</view>
+    <view class="info-item">
+      <text class="info-label">日期：</text>
+      <text class="info-value">{{matchDetail.date}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">地点：</text>
+      <text class="info-value">{{matchDetail.location}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">报名截止：</text>
+      <text class="info-value">{{matchDetail.deadline}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">报名费用：</text>
+      <text class="info-value">{{matchDetail.fee}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">组织方：</text>
+      <text class="info-value">{{matchDetail.organizer}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">联系方式：</text>
+      <text class="info-value">{{matchDetail.contact}}</text>
+    </view>
+  </view>
+
+  <!-- 赛事描述 -->
+  <view class="desc-section card">
+    <view class="section-title">赛事描述</view>
+    <view class="desc-content">{{matchDetail.description}}</view>
+  </view>
+
+  <!-- 参赛要求 -->
+  <view class="req-section card">
+    <view class="section-title">参赛要求</view>
+    <view class="req-content">{{matchDetail.requirements}}</view>
+  </view>
+
+  <!-- 比赛项目 -->
+  <view class="category-section card">
+    <view class="section-title">比赛项目</view>
+    <view class="category-list">
+      <view class="category-item" wx:for="{{matchDetail.categories}}" wx:key="*this">
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 赛程安排 -->
+  <view class="schedule-section card">
+    <view class="section-title">赛程安排</view>
+    <view class="schedule-list">
+      <view class="schedule-item" wx:for="{{matchDetail.schedule}}" wx:key="date">
+        <view class="schedule-date">{{item.date}}</view>
+        <view class="schedule-events">
+          <view class="event-item" wx:for="{{item.events}}" wx:for-item="event" wx:key="*this">
+            <text>{{event}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 报名按钮 -->
+  <view class="register-section">
+    <button 
+      class="btn btn-primary register-btn" 
+      bindtap="onRegisterTap"
+      disabled="{{isExpired || isRegistered}}"
+    >
+      {{isRegistered ? '已报名' : (isExpired ? '报名已截止' : '立即报名')}}
+    </button>
+  </view>
+</view>
+
+<!-- 加载中 -->
+<view class="loading" wx:else>
+  <text>加载中...</text>
+</view>

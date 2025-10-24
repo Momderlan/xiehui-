@@ -1,0 +1,43 @@
+<!--pages/notification/notification.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-title">官方通知</view>
+
+  <!-- 通知列表 -->
+  <view class="notification-list">
+    <block wx:for="{{notificationList}}" wx:key="id">
+      <view 
+        class="notification-item card" 
+        bindtap="onNotificationTap" 
+        data-index="{{index}}"
+      >
+        <view class="item-header">
+          <image 
+            src="{{item.imageUrl}}" 
+            class="item-image" 
+            mode="aspectFill"
+          ></image>
+          <view class="item-info">
+            <view class="item-title">{{item.title}}</view>
+            <view class="item-meta">
+              <view class="item-date">{{item.date}}</view>
+              <view class="item-type" style="color: {{themeColor}}">{{item.type}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="item-content">
+          <view class="item-summary">{{item.content}}</view>
+        </view>
+        <view class="item-footer">
+          <view class="read-status" wx:if="{{item.isRead}}">已读</view>
+          <view class="read-status unread" wx:else style="color: {{themeColor}}">未读</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 无数据提示 -->
+  <view class="no-data" wx:if="{{notificationList.length === 0}}">
+    <text>暂无通知</text>
+  </view>
+</view>

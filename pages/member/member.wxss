@@ -1,0 +1,173 @@
+/* pages/member/member.wxss */
+
+.container {
+  padding-top: 80rpx;
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: fixed;
+  top: 20rpx;
+  left: 20rpx;
+  z-index: 999;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 页面标题 */
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+/* 会员状态 */
+.member-status {
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.status-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  color: #333;
+}
+
+.status-desc {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.status-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-level {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.status-info {
+  width: 100%;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+}
+
+.info-label {
+  width: 180rpx;
+  color: #666;
+}
+
+.info-value {
+  flex: 1;
+  color: #333;
+}
+
+/* 功能按钮 */
+.function-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+}
+
+.function-btn {
+  margin-bottom: 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+}
+
+.function-btn[disabled] {
+  background-color: #f5f5f5;
+  color: #999;
+  border: 1rpx solid #ddd;
+}
+
+/* 会员等级介绍 */
+.level-container {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding-left: 30rpx;
+}
+
+.level-list {
+  width: 100%;
+}
+
+.level-item {
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+}
+
+.level-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.level-name {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.level-fee {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.level-benefits {
+  margin-top: 10rpx;
+}
+
+.benefit-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  color: #333;
+}
+
+.benefit-list {
+  padding-left: 10rpx;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.benefit-item .iconfont {
+  margin-right: 10rpx;
+  font-size: 24rpx;
+}
+
+/* 图标字体 */
+@font-face {
+  font-family: 'iconfont';
+  src: url('data:font/woff2;charset=utf-8;base64,d09GMgABAAAAAAOMAAsAAAAAB8AAAANAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDHAqCYIJGATYCJAMQCwoABCAFhGcHSRuFBhHVm1PIfhbYMbxBKKUYHQiCiKBqzez+7gEPEAQVG6p8lESjJLrR6FYa3ahGIlskEt1K0hAplXA53SuQdmGdWhGhO/+5fPr/Qyx5tjWXrDFoDBoHeLRBA7SBDXRADvxD/jL8xV16mUC7cT3EgZFJeUBFYY0KxLmzMwFUGJepQg3VoVJzMIvHoKqmG8YW8Aj/Pv6jFVQkdRnrxNOzEwYy/pz9XIeZ/n+6STeA358JaBtZswCFOK4NHVAFiVmodoFPDQFfVZL4c/Zz3ef6/6/YsyORpvaPFyJpzNYGbIKKmfhzVhIEn+uSIPhcLwkKn+tPQtWQdrSjA3iGiPzhi7SQ8UUq8CGlROTd3Aw+3N0dTCZra1uG/djFaVeoFgvsxzKcpnEYG9PpztHpztLpLjMYrjAYJI0GSfZPmUx3xFQ+w7y8mDMzmXNz6XNzaZIOvbiYt7iYv7RUwGrEQjazkLVEDAwMC8Tw8MjQ0Mjw8AhXVOQSCt0CgWsgALmCcFGRRyj0CoUeocgrFLvFYp9Y7BWJ/CKxTyTyi8UBsdjHF/t4Yi9P7OeJfTxxgCcO8sQBvtjPFwd4Yj9P7OWJg2KJTyIJSiQhqSQslUSkkpBUEpBK/FKJT

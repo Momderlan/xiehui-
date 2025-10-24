@@ -1,0 +1,86 @@
+<!--pages/member-apply/member-apply.wxml-->
+<view class="container">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="onBackTap">
+    <text class="iconfont icon-back"></text>
+  </view>
+
+  <!-- 页面标题 -->
+  <view class="page-title">会员申请</view>
+
+  <!-- 申请表单 -->
+  <view class="form-container card">
+    <view class="form-group">
+      <view class="form-label">会员等级</view>
+      <picker 
+        mode="selector" 
+        range="{{memberLevels}}" 
+        range-key="name" 
+        value="{{selectedLevel - 1}}" 
+        bindchange="onLevelChange"
+      >
+        <view class="picker">
+          <view class="picker-value">
+            {{memberLevels[selectedLevel - 1].name}} ({{memberLevels[selectedLevel - 1].fee}})
+          </view>
+          <view class="picker-arrow">
+            <text class="iconfont icon-arrow"></text>
+          </view>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">姓名</view>
+      <input 
+        class="form-input" 
+        type="text" 
+        placeholder="请输入您的真实姓名" 
+        value="{{formData.name}}" 
+        bindinput="onInput" 
+        data-field="name"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">手机号</view>
+      <input 
+        class="form-input" 
+        type="number" 
+        placeholder="请输入您的手机号" 
+        value="{{formData.phone}}" 
+        bindinput="onInput" 
+        data-field="phone"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">身份证号</view>
+      <input 
+        class="form-input" 
+        type="idcard" 
+        placeholder="请输入您的身份证号" 
+        value="{{formData.idCard}}" 
+        bindinput="onInput" 
+        data-field="idCard"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">地址（选填）</view>
+      <textarea 
+        class="form-textarea" 
+        placeholder="请输入您的详细地址" 
+        value="{{formData.address}}" 
+        bindinput="onInput" 
+        data-field="address"
+      />
+    </view>
+
+    <view class="form-tips">
+      <text>注：请确保填写的信息真实有效，我们将对您的个人信息严格保密。</text>
+    </view>
+
+    <button class="btn btn-primary submit-btn" bindtap="onSubmit">提交申请</button>
+  </view>
+</view>
