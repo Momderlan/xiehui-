@@ -1,6 +1,7 @@
 // pages/club-apply/club-apply.js
 const app = getApp()
 const util = require('../../utils/util')
+const { clubApi } = require('../../utils/api')
 
 Page({
   /**
@@ -8,22 +9,136 @@ Page({
    */
   data: {
     showForm: false, // 是否显示申请表单
+    clubList: [], // 俱乐部列表
+    myClubs: [], // 我的俱乐部
     formData: {
       clubName: '',
       contactPerson: '',
       phone: '',
       email: '',
       address: '',
-      description: ''
+      description: '',
+      facilities: '',
+      openingHours: ''
     },
-    themeColor: app.globalData.themeColor // 主题色
+    themeColor: app.globalData.themeColor, // 主题色
+    page: 1, // 当前页码
+    size: 10, // 每页数量
+    hasMore: true, // 是否还有更多数据
+    loading: false // 是否正在加载
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.loadClubList()
+    this.loadMyClubs()
+  },
+
+  /**
+   * 加载俱乐部列表
+   */
+  loadClubList: function(isRefresh = false) {
+    // 如果是刷新，重置页码
+    if (isRefresh) {
+      this.setData({
+        page: 1,
+        clubList: [],
+        hasMore: true
+      })
+    }
+
+    // 如果正在加载或没有更多数据，则返回
+    if (this.data.loading || !this.data.hasMore) {
+      return
+    }
+
+    this.setData({ loading: true })
+
+    clubApi.getList({
+      page: this.data.page,
+      size: this.data.size
+    }).then(data => {
+      const { records, total, current } = data
+      
+      // 合并数据
+      const newList = isRefresh ? records : [...this.data.clubList, ...records]
+      
+      this.setData({
+        clubList: newList,
+        page: current + 1,
+        hasMore: newList.length < total,
+        loading: false
+      })
+
+      console.log('俱乐部列表加载成功', records)
+    }).catch(err => {
+      console.error('俱乐部列表加载失败', err)
+      this.setData({ loading: false })
+    })
+  },
+
+  /**
+   * 加载我的俱乐部
+   */
+  loadMyClubs: function() {
+    clubApi.getMyClubs().then(data => {
+      this.setData({
+        myClubs: data
+      })
+      console.log('我的俱乐部加载成功', data)
+    }).catch(err => {
+      console.error('我的俱乐部加载失败', err)
+    })
+  },
+
+  /**
+   * 查看俱乐部详情
+   */
+  onClubTap: function(e) {
+    const { id } = e.currentTarget.dataset
+    // 可以跳转到俱乐部详情页面
+    util.showToast('俱乐部详情功能待开发')
+  },
+
+  /**
+   * 申请加入俱乐部
+   */
+  onJoinClub: function(e) {
+    const { id, name } = e.currentTarget.dataset
     
+    util.showModal('确认申请', `您确定要申请加入"${name}"吗？`, true)
+      .then(confirmed => {
+        if (confirmed) {
+          this.submitJoinApplication(id)
+        }
+      })
+  },
+
+  /**
+   * 提交加入申请
+   */
+  submitJoinApplication: function(clubId) {
+    util.showLoading('提交中...')
+    
+    clubApi.apply({
+      clubId: clubId,
+      reason: '希望加入俱乐部'
+    }).then(data => {
+      util.hideLoading()
+      util.showToast('申请已提交', 'success')
+      
+      console.log('加入申请提交成功', data)
+      
+      // 重新加载我的俱乐部
+      setTimeout(() => {
+        this.loadMyClubs()
+      }, 1000)
+    }).catch(err => {
+      util.hideLoading()
+      console.error('加入申请提交失败', err)
+    })
   },
 
   /**
@@ -83,20 +198,36 @@ Page({
       return
     }
     
-    if (formData.email && !util.isValidEmail(formData.email)) {
-      util.showToast('邮箱格式不正确')
+    if (!formData.address.trim()) {
+      util.showToast('请输入俱乐部地址')
       return
     }
     
-    // 实际项目中，这里应该是提交数据到服务器
-    // 这里简单模拟提交成功
+    if (!formData.description.trim()) {
+      util.showToast('请输入俱乐部简介')
+      return
+    }
+    
+    // 提交创建俱乐部申请
     util.showLoading('提交中...')
     
-    setTimeout(() => {
+    clubApi.createApplication({
+      name: formData.clubName,
+      description: formData.description,
+      address: formData.address,
+      contactPhone: formData.phone,
+      contactPerson: formData.contactPerson,
+      facilities: formData.facilities || '标准场地',
+      openingHours: formData.openingHours || '周一至周日 08:00-22:00',
+      logo: '',
+      images: ''
+    }).then(data => {
       util.hideLoading()
       util.showToast('申请提交成功', 'success')
       
-      // 隐藏表单
+      console.log('创建俱乐部申请提交成功', data)
+      
+      // 隐藏表单并重置
       this.setData({
         showForm: false,
         formData: {
@@ -105,10 +236,15 @@ Page({
           phone: '',
           email: '',
           address: '',
-          description: ''
+          description: '',
+          facilities: '',
+          openingHours: ''
         }
       })
-    }, 1500)
+    }).catch(err => {
+      util.hideLoading()
+      console.error('创建俱乐部申请提交失败', err)
+    })
   },
 
   /**
@@ -150,14 +286,19 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
+    this.loadClubList(true)
+    this.loadMyClubs()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    // 加载更多俱乐部
+    this.loadClubList(false)
   },
 
   /**

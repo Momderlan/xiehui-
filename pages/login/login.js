@@ -1,0 +1,182 @@
+// pages/login/login.js
+const { authApi } = require('../../utils/api')
+const util = require('../../utils/util')
+
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    loginForm: {
+      username: '',
+      password: ''
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    // 检查是否已登录
+    const token = wx.getStorageSync('token')
+    if (token) {
+      // 已登录，跳转到个人中心
+      wx.switchTab({
+        url: '/pages/personal/personal'
+      })
+    }
+  },
+
+  /**
+   * 登录表单输入
+   */
+  onLoginInput(e) {
+    const { field } = e.currentTarget.dataset
+    this.setData({
+      [`loginForm.${field}`]: e.detail.value
+    })
+  },
+
+  /**
+   * 账号密码登录
+   */
+  onLogin() {
+    const { username, password } = this.data.loginForm
+
+    // 表单验证
+    if (!username.trim()) {
+      wx.showToast({
+        title: '请输入用户名',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!password) {
+      wx.showToast({
+        title: '请输入密码',
+        icon: 'none'
+      })
+      return
+    }
+
+    wx.showLoading({
+      title: '登录中...',
+      mask: true
+    })
+
+    authApi.login({
+      username: username.trim(),
+      password: password
+    }).then(data => {
+      wx.hideLoading()
+      
+      // 保存token和用户信息
+      wx.setStorageSync('token', data.token)
+      if (data.userId) {
+        wx.setStorageSync('userId', data.userId)
+      }
+      
+      wx.showToast({
+        title: '登录成功',
+        icon: 'success',
+        duration: 1500
+      })
+
+      // 延迟跳转，让用户看到成功提示
+      setTimeout(() => {
+        wx.switchTab({
+          url: '/pages/personal/personal'
+        })
+      }, 1500)
+    }).catch(err => {
+      wx.hideLoading()
+      console.error('登录失败', err)
+      wx.showToast({
+        title: err.message || '登录失败',
+        icon: 'none'
+      })
+    })
+  },
+
+  /**
+   * 微信快捷登录
+   */
+  onWechatLogin() {
+    wx.showLoading({
+      title: '登录中...',
+      mask: true
+    })
+
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          // 获取用户信息
+          wx.getUserProfile({
+            desc: '用于完善用户资料',
+            success: (userRes) => {
+              const { nickName, avatarUrl } = userRes.userInfo
+              
+              // 调用后端微信登录接口
+              authApi.wechatLogin({
+                code: res.code,
+                nickName: nickName,
+                avatarUrl: avatarUrl
+              }).then(data => {
+                wx.hideLoading()
+                
+                // 保存token和用户信息
+                wx.setStorageSync('token', data.token)
+                if (data.userInfo) {
+                  wx.setStorageSync('userInfo', data.userInfo)
+                }
+                
+                wx.showToast({
+                  title: '登录成功',
+                  icon: 'success',
+                  duration: 1500
+                })
+
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '/pages/personal/personal'
+                  })
+                }, 1500)
+              }).catch(err => {
+                wx.hideLoading()
+                console.error('微信登录失败', err)
+                wx.showToast({
+                  title: err.message || '登录失败',
+                  icon: 'none'
+                })
+              })
+            },
+            fail: (err) => {
+              wx.hideLoading()
+              console.log('用户拒绝授权', err)
+              wx.showToast({
+                title: '需要授权才能登录',
+                icon: 'none'
+              })
+            }
+          })
+        } else {
+          wx.hideLoading()
+          console.error('微信登录失败', res.errMsg)
+          wx.showToast({
+            title: '微信登录失败',
+            icon: 'none'
+          })
+        }
+      },
+      fail: (err) => {
+        wx.hideLoading()
+        console.error('wx.login调用失败', err)
+        wx.showToast({
+          title: '登录失败，请重试',
+          icon: 'none'
+        })
+      }
+    })
+  }
+})

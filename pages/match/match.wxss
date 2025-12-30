@@ -1,108 +1,134 @@
 /* pages/match/match.wxss */
 
+.page {
+  min-height: 100vh;
+  background-color: #F9FAFB;
+}
+
 .container {
-  padding-top: 80rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
 }
 
-/* 返回按钮 */
-.back-btn {
-  position: fixed;
-  top: 20rpx;
-  left: 20rpx;
-  z-index: 999;
-  width: 60rpx;
-  height: 60rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+/* ========== 页面标题 ========== */
+.page-header {
+  margin-bottom: 24rpx;
 }
 
-/* 页面标题 */
 .page-title {
-  font-size: 36rpx;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 30rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8rpx;
+  line-height: 1.2;
 }
 
-/* 赛事列表 */
+.page-desc {
+  font-size: 26rpx;
+  color: #6B7280;
+}
+
+/* ========== 赛事列表 - 三段式结构 ========== */
 .match-list {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
 }
 
 .match-item {
-  margin-bottom: 30rpx;
-  overflow: hidden;
+  padding: 24rpx;
+  transition: all 0.2s;
 }
 
+.match-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 第一行：标题 + 状态标签 */
 .match-header {
-  position: relative;
-  height: 200rpx;
-}
-
-.match-image {
-  width: 100%;
-  height: 100%;
-}
-
-.match-status {
-  position: absolute;
-  top: 20rpx;
-  right: 20rpx;
-  padding: 6rpx 16rpx;
-  border-radius: 30rpx;
-  color: #fff;
-  font-size: 24rpx;
-}
-
-.match-content {
-  padding: 20rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
 }
 
 .match-title {
+  flex: 1;
   font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 20rpx;
-  color: #333;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
 }
 
+.match-status {
+  flex-shrink: 0;
+  margin-top: 4rpx;
+}
+
+/* 第二行：时间和地点 */
 .match-info {
-  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10rpx;
-  font-size: 26rpx;
-  color: #666;
+  gap: 8rpx;
 }
 
-.info-item .iconfont {
-  margin-right: 10rpx;
-  font-size: 26rpx;
+.info-icon {
+  font-size: 24rpx;
+  width: 32rpx;
+  text-align: center;
 }
 
+.info-text {
+  font-size: 26rpx;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+/* 第三行：截止时间 + 操作入口 */
 .match-footer {
   display: flex;
-  justify-content: flex-end;
-}
-
-.match-footer .btn {
-  font-size: 26rpx;
-  padding: 10rpx 30rpx;
-}
-
-/* 无数据提示 */
-.no-data {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 300rpx;
-  color: #999;
-  font-size: 28rpx;
+  justify-content: space-between;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #F3F4F6;
 }
 
+.deadline-text {
+  font-size: 24rpx;
+  color: #9CA3AF;
+}
+
+.action-link {
+  font-size: 26rpx;
+  color: #F97316;
+  font-weight: 500;
+}
+
+/* ========== 空状态 ========== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.3;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #9CA3AF;
+}

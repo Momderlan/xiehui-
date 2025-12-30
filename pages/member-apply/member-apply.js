@@ -2,6 +2,7 @@
 const app = getApp()
 const { memberLevels } = require('../../utils/mock')
 const util = require('../../utils/util')
+const { memberApi } = require('../../utils/api')
 
 Page({
   /**
@@ -30,11 +31,23 @@ Page({
    * 加载会员等级数据
    */
   loadMemberLevels: function () {
-    // 实际项目中，这里应该是从服务器获取数据
-    // 这里使用模拟数据
-    this.setData({
-      memberLevels: memberLevels,
-      selectedLevel: memberLevels[0].id // 默认选中第一个等级
+    // 从服务器获取会员等级列表
+    memberApi.getLevels().then(data => {
+      // 过滤掉普通会员（价格为0的）
+      const levels = data.filter(item => item.price > 0)
+      
+      this.setData({
+        memberLevels: levels,
+        selectedLevel: levels.length > 0 ? 0 : null
+      })
+      console.log('会员等级加载成功', levels)
+    }).catch(err => {
+      console.error('会员等级加载失败', err)
+      // 使用mock数据作为降级方案
+      this.setData({
+        memberLevels: memberLevels,
+        selectedLevel: 0
+      })
     })
   },
 
@@ -64,7 +77,13 @@ Page({
    * 表单提交事件
    */
   onSubmit: function () {
-    const { formData, selectedLevel } = this.data
+    const { formData, selectedLevel, memberLevels } = this.data
+    
+    // 检查是否选择了会员等级
+    if (selectedLevel === null || !memberLevels[selectedLevel]) {
+      util.showToast('请选择会员等级')
+      return
+    }
     
     // 表单验证
     if (!formData.name.trim()) {
@@ -91,20 +110,44 @@ Page({
       util.showToast('身份证号格式不正确')
       return
     }
+
+    // 获取选中的会员等级ID
+    const selectedLevelData = memberLevels[selectedLevel]
     
-    // 实际项目中，这里应该是提交数据到服务器
-    // 这里简单模拟提交成功
-    util.showLoading('提交中...')
+    // 确认购买
+    util.showModal(
+      '确认购买',
+      `您将购买${selectedLevelData.levelName}，费用：¥${selectedLevelData.price}`,
+      true
+    ).then(confirmed => {
+      if (confirmed) {
+        this.purchaseMember(selectedLevelData.id)
+      }
+    })
+  },
+
+  /**
+   * 购买会员
+   */
+  purchaseMember: function(levelId) {
+    util.showLoading('购买中...')
     
-    setTimeout(() => {
+    memberApi.purchase({
+      levelId: levelId
+    }).then(data => {
       util.hideLoading()
-      util.showToast('申请提交成功', 'success')
+      util.showToast('购买成功', 'success')
+      
+      console.log('会员购买成功', data)
       
       // 返回上一页
       setTimeout(() => {
         wx.navigateBack()
       }, 1500)
-    }, 1500)
+    }).catch(err => {
+      util.hideLoading()
+      console.error('会员购买失败', err)
+    })
   },
 
   /**

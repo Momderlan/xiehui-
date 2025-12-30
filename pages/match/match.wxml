@@ -1,49 +1,53 @@
 <!--pages/match/match.wxml-->
-<view class="container">
-  <!-- 返回按钮 -->
-  <view class="back-btn" bindtap="onBackTap">
-    <text class="iconfont icon-back"></text>
-  </view>
+<view class="page">
+  <view class="container">
 
-  <!-- 页面标题 -->
-  <view class="page-title">赛事报名</view>
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="page-title">赛事报名</view>
+      <view class="page-desc">查看并报名最新赛事</view>
+    </view>
 
-  <!-- 赛事列表 -->
-  <view class="match-list">
-    <block wx:for="{{matchList}}" wx:key="id">
-      <view class="match-item card">
-        <view class="match-header">
-          <image src="{{item.imageUrl}}" class="match-image" mode="aspectFill"></image>
-          <view class="match-status" style="background-color: {{item.status === '报名中' ? themeColor : '#999'}}">
-            {{item.status}}
+    <!-- 赛事列表 - 三段式结构 -->
+    <view class="match-list">
+      <block wx:for="{{matchList}}" wx:key="id">
+        <view class="match-item card" bindtap="onViewDetailTap" data-id="{{item.id}}">
+          
+          <!-- 第一行：标题 + 状态标签 -->
+          <view class="match-header">
+            <view class="match-title">{{item.title}}</view>
+            <view class="match-status status-tag {{item.status === '报名中' ? 'status-tag-primary' : 'status-tag-gray'}}">
+              {{item.status}}
+            </view>
           </view>
-        </view>
-        <view class="match-content">
-          <view class="match-title">{{item.title}}</view>
+
+          <!-- 第二行：时间和地点 -->
           <view class="match-info">
             <view class="info-item">
-              <text class="iconfont icon-date"></text>
-              <text>日期：{{item.date}}</text>
+              <text class="info-icon">📅</text>
+              <text class="info-text">{{item.date}}</text>
             </view>
             <view class="info-item">
-              <text class="iconfont icon-location"></text>
-              <text>地点：{{item.location}}</text>
-            </view>
-            <view class="info-item">
-              <text class="iconfont icon-deadline"></text>
-              <text>报名截止：{{item.deadline}}</text>
+              <text class="info-icon">📍</text>
+              <text class="info-text">{{item.location}}</text>
             </view>
           </view>
+
+          <!-- 第三行：截止时间 + 操作入口 -->
           <view class="match-footer">
-            <button class="btn btn-primary" bindtap="onViewDetailTap" data-id="{{item.id}}">查看详情</button>
+            <view class="deadline-text">报名截止：{{item.deadline}}</view>
+            <view class="action-link">查看详情 →</view>
           </view>
+
         </view>
-      </view>
-    </block>
+      </block>
+    </view>
+
   </view>
 
   <!-- 无数据提示 -->
-  <view class="no-data" wx:if="{{matchList.length === 0}}">
-    <text>暂无赛事信息</text>
+  <view class="empty-state" wx:if="{{matchList.length === 0}}">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">暂无赛事信息</view>
   </view>
 </view>

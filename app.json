@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
     "pages/match/match",
     "pages/match-detail/match-detail",
     "pages/member/member",
@@ -12,33 +13,33 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#AACFFF",
-    "navigationBarTitleText": "小程序",
+    "navigationBarBackgroundColor": "#0F172A",
+    "navigationBarTitleText": "拳击爱好者协会",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#AACFFF",
+    "selectedColor": "#F97316",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home_selected.png"
+        "iconPath": "icon/首页.png",
+        "selectedIconPath": "icon/首页.png"
       },
       {
         "pagePath": "pages/notification/notification",
         "text": "官方通知",
-        "iconPath": "images/notification.png",
-        "selectedIconPath": "images/notification_selected.png"
+        "iconPath": "icon/官方通知.png",
+        "selectedIconPath": "icon/官方通知.png"
       },
       {
         "pagePath": "pages/personal/personal",
         "text": "个人中心",
-        "iconPath": "images/personal.png",
-        "selectedIconPath": "images/personal_selected.png"
+        "iconPath": "icon/个人中心.png",
+        "selectedIconPath": "icon/个人中心.png"
       }
     ]
   },

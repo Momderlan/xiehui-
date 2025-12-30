@@ -1,9 +1,6 @@
 <!--pages/match-detail/match-detail.wxml-->
-<view class="container" wx:if="{{matchDetail}}">
-  <!-- 返回按钮 -->
-  <view class="back-btn" bindtap="onBackTap">
-    <text class="iconfont icon-back"></text>
-  </view>
+<view class="page">
+  <view class="container" wx:if="{{matchDetail}}">
 
   <!-- 赛事封面图 -->
   <view class="match-header">
@@ -92,9 +89,11 @@
       {{isRegistered ? '已报名' : (isExpired ? '报名已截止' : '立即报名')}}
     </button>
   </view>
-</view>
 
-<!-- 加载中 -->
-<view class="loading" wx:else>
-  <text>加载中...</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:else>
+    <text>加载中...</text>
+  </view>
 </view>

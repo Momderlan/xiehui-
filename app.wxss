@@ -1,24 +1,65 @@
 /**app.wxss**/
 page {
   height: 100%;
+  width: 100%;
   font-size: 28rpx;
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f8f8;
+  color: #111827;
+  background-color: #F9FAFB;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-/* 主题色 */
+/* 主题色 - 深靛蓝 */
 .theme-color {
-  color: #AACFFF;
+  color: #1E3A8A;
 }
 
 .theme-bg {
-  background-color: #AACFFF;
+  background-color: #1E3A8A;
 }
 
 .theme-border {
-  border: 1px solid #AACFFF;
+  border: 1px solid #1E3A8A;
+}
+
+/* 强调色 - 橙色 */
+.accent-color {
+  color: #F97316;
+}
+
+.accent-bg {
+  background-color: #F97316;
+}
+
+.accent-border {
+  border: 1px solid #F97316;
+}
+
+/* 辅助色 - 青绿色 */
+.secondary-color {
+  color: #14B8A6;
+}
+
+.secondary-bg {
+  background-color: #14B8A6;
+}
+
+.secondary-border {
+  border: 1px solid #14B8A6;
+}
+
+/* 渐变背景 */
+.gradient-primary {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);
 }
 
 /* 常用布局 */
@@ -26,8 +67,9 @@ page {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 30rpx;
+  padding: 20rpx;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .flex-row {
@@ -54,71 +96,134 @@ page {
   align-items: center;
 }
 
-/* 常用间距 */
-.margin-top-sm {
-  margin-top: 10rpx;
-}
+/* 间距系统 - 统一规范 */
+.margin-8 { margin: 8rpx; }
+.margin-12 { margin: 12rpx; }
+.margin-16 { margin: 16rpx; }
+.margin-20 { margin: 20rpx; }
+.margin-24 { margin: 24rpx; }
+.margin-32 { margin: 32rpx; }
 
-.margin-top {
-  margin-top: 20rpx;
-}
+.margin-top-8 { margin-top: 8rpx; }
+.margin-top-12 { margin-top: 12rpx; }
+.margin-top-16 { margin-top: 16rpx; }
+.margin-top-20 { margin-top: 20rpx; }
+.margin-top-24 { margin-top: 24rpx; }
+.margin-top-32 { margin-top: 32rpx; }
 
-.margin-top-lg {
-  margin-top: 40rpx;
-}
+.margin-bottom-8 { margin-bottom: 8rpx; }
+.margin-bottom-12 { margin-bottom: 12rpx; }
+.margin-bottom-16 { margin-bottom: 16rpx; }
+.margin-bottom-20 { margin-bottom: 20rpx; }
+.margin-bottom-24 { margin-bottom: 24rpx; }
+.margin-bottom-32 { margin-bottom: 32rpx; }
 
-.margin-bottom-sm {
-  margin-bottom: 10rpx;
-}
+.padding-8 { padding: 8rpx; }
+.padding-12 { padding: 12rpx; }
+.padding-16 { padding: 16rpx; }
+.padding-20 { padding: 20rpx; }
+.padding-24 { padding: 24rpx; }
+.padding-32 { padding: 32rpx; }
 
-.margin-bottom {
-  margin-bottom: 20rpx;
-}
-
-.margin-bottom-lg {
-  margin-bottom: 40rpx;
-}
-
-.padding {
-  padding: 20rpx;
-}
-
-.padding-lg {
-  padding: 40rpx;
-}
-
-/* 按钮样式 */
+/* 按钮样式 - 层级系统 */
 .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20rpx 40rpx;
-  border-radius: 8rpx;
-  font-size: 28rpx;
-  transition: all 0.3s;
+  padding: 24rpx 48rpx;
+  border-radius: 12rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  box-sizing: border-box;
 }
 
+/* 主按钮 - 视觉最强 */
 .btn-primary {
-  background-color: #AACFFF;
-  color: #fff;
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(249, 115, 22, 0.4);
 }
 
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(249, 115, 22, 0.3);
+}
+
+/* 次按钮 - 降级 */
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #1E3A8A;
+  border: 2rpx solid #1E3A8A;
+  box-shadow: none;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+  background-color: #F9FAFB;
+}
+
+/* 文字按钮 - 最弱 */
+.btn-text {
+  background-color: transparent;
+  color: #6B7280;
+  font-size: 28rpx;
+  padding: 16rpx 24rpx;
+  box-shadow: none;
+}
+
+.btn-text:active {
+  color: #1E3A8A;
+}
+
+/* 描边按钮 */
 .btn-outline {
   background-color: transparent;
-  color: #AACFFF;
-  border: 1rpx solid #AACFFF;
+  color: #1E3A8A;
+  border: 2rpx solid #E5E7EB;
 }
 
-/* 卡片样式 */
+.btn-outline:active {
+  transform: scale(0.98);
+  border-color: #1E3A8A;
+}
+
+/* 卡片样式 - 统一规范 */
 .card {
-  background-color: #fff;
-  border-radius: 12rpx;
-  padding: 30rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* 文本样式 */
+.card-lg {
+  padding: 32rpx;
+  border-radius: 16rpx;
+}
+
+.card-sm {
+  padding: 16rpx;
+  border-radius: 12rpx;
+}
+
+/* 阴影系统 */
+.shadow-light {
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+.shadow-medium {
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.shadow-strong {
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 文本样式 - 层级系统 */
 .text-center {
   text-align: center;
 }
@@ -127,11 +232,55 @@ page {
   font-weight: bold;
 }
 
-.text-small {
+/* 主信息 - 大号深色 */
+.text-primary {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.text-primary-lg {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+}
+
+/* 次信息 - 小号灰色 */
+.text-secondary {
+  font-size: 28rpx;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+/* 辅助信息 - 更小更浅 */
+.text-tertiary {
+  font-size: 24rpx;
+  color: #9CA3AF;
+  line-height: 1.5;
+}
+
+/* 标签文字 */
+.text-label {
+  font-size: 26rpx;
+  color: #6B7280;
+}
+
+/* 尺寸工具类 */
+.text-xs {
+  font-size: 20rpx;
+}
+
+.text-sm {
   font-size: 24rpx;
 }
 
-.text-large {
+.text-base {
+  font-size: 28rpx;
+}
+
+.text-lg {
   font-size: 32rpx;
 }
 
@@ -139,37 +288,74 @@ page {
   font-size: 36rpx;
 }
 
+.text-2xl {
+  font-size: 40rpx;
+}
+
 .text-gray {
-  color: #999;
+  color: #9CA3AF;
 }
 
 /* 表单样式 */
 .form-group {
-  margin-bottom: 30rpx;
+  margin-bottom: 24rpx;
 }
 
 .form-label {
   display: block;
-  margin-bottom: 10rpx;
-  font-size: 28rpx;
-  color: #666;
+  margin-bottom: 8rpx;
+  font-size: 26rpx;
+  color: #6B7280;
 }
 
 .form-input {
   width: 100%;
-  height: 80rpx;
-  padding: 0 20rpx;
-  border: 1rpx solid #ddd;
-  border-radius: 8rpx;
+  height: 88rpx;
+  padding: 0 24rpx;
+  border: 2rpx solid #E5E7EB;
+  border-radius: 12rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
+  background-color: #FFFFFF;
+  color: #111827;
+}
+
+.form-input:focus {
+  border-color: #1E3A8A;
+}
+
+.form-input::placeholder {
+  color: #9CA3AF;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 16rpx 24rpx;
+  border: 2rpx solid #E5E7EB;
+  border-radius: 12rpx;
   box-sizing: border-box;
   font-size: 28rpx;
+  background-color: #FFFFFF;
+  color: #111827;
+  line-height: 1.5;
+}
+
+.form-textarea:focus {
+  border-color: #1E3A8A;
+}
+
+.form-textarea::placeholder {
+  color: #9CA3AF;
 }
 
 /* 列表样式 */
 .list-item {
   display: flex;
-  padding: 30rpx 0;
-  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #E5E7EB;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .list-item:last-child {
@@ -190,4 +376,264 @@ page {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式图片 */
+image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* 文本截断 */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.text-ellipsis-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* 自动换行 */
+.word-break {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+/* 防止内容溢出 */
+.no-overflow {
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 安全区域适配 */
+.safe-area {
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top);
+  box-sizing: border-box;
+}
+
+/* ==================== 统一动画系统 ==================== */
+/* 遵循原则：只在状态变化时动，只用位移+透明度 */
+
+/* 页面进入动画 - 从下往上轻微滑入 */
+.page-enter {
+  animation: pageEnter 200ms ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 页面退出动画 - 向下轻微滑出 */
+.page-leave {
+  animation: pageLeave 150ms ease-in;
+}
+
+@keyframes pageLeave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12rpx);
+  }
+}
+
+/* 列表项进入动画 - 逐个轻微上浮 */
+.list-item-enter {
+  animation: listItemEnter 200ms ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes listItemEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 列表项延迟动画 - 用于错开效果 */
+.list-item-delay-1 { animation-delay: 20ms; }
+.list-item-delay-2 { animation-delay: 40ms; }
+.list-item-delay-3 { animation-delay: 60ms; }
+.list-item-delay-4 { animation-delay: 80ms; }
+.list-item-delay-5 { animation-delay: 100ms; }
+.list-item-delay-6 { animation-delay: 120ms; }
+.list-item-delay-7 { animation-delay: 140ms; }
+.list-item-delay-8 { animation-delay: 160ms; }
+.list-item-delay-9 { animation-delay: 180ms; }
+.list-item-delay-10 { animation-delay: 200ms; }
+
+/* 刷新完成动画 - 轻微闪现 */
+.refresh-complete {
+  animation: refreshComplete 120ms ease-out;
+}
+
+@keyframes refreshComplete {
+  from {
+    opacity: 0.95;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* TabBar 切换动画 - 内容区淡入淡出 */
+.tab-switch {
+  animation: tabSwitch 120ms ease-out;
+}
+
+@keyframes tabSwitch {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 按钮点击动画 - 轻微缩小 */
+.btn-press:active {
+  transform: scale(0.96);
+  transition: transform 80ms ease-out;
+}
+
+/* 成功反馈动画 - Toast 淡入 */
+.success-feedback {
+  animation: successFeedback 150ms ease-out;
+}
+
+@keyframes successFeedback {
+  from {
+    opacity: 0;
+    transform: translateY(6rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 错误反馈动画 - 轻微抖动 */
+.error-shake {
+  animation: errorShake 120ms ease-out;
+}
+
+@keyframes errorShake {
+  0% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(-4rpx);
+  }
+  66% {
+    transform: translateX(4rpx);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* 淡入动画 - 通用 */
+.fade-in {
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 淡出动画 - 通用 */
+.fade-out {
+  animation: fadeOut 150ms ease-in;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* 禁用动画 - 用于超过10项的列表 */
+.no-animation {
+  animation: none !important;
+}
+
+/* 动画容器 - 用于 wx.createAnimation */
+.animation-container {
+  transition: all 200ms ease-out;
+}
+
+/* 固定底部操作栏 */
+.fixed-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  padding: 16rpx 32rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -2rpx 8rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* 状态标签 */
+.status-tag {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.status-tag-primary {
+  background-color: rgba(249, 115, 22, 0.1);
+  color: #F97316;
+}
+
+.status-tag-success {
+  background-color: rgba(20, 184, 166, 0.1);
+  color: #14B8A6;
+}
+
+.status-tag-gray {
+  background-color: rgba(156, 163, 175, 0.1);
+  color: #6B7280;
 }

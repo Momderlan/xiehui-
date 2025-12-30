@@ -2,6 +2,7 @@
 const app = getApp()
 const { memberInfo, memberLevels } = require('../../utils/mock')
 const util = require('../../utils/util')
+const { memberApi } = require('../../utils/api')
 
 Page({
   /**
@@ -25,13 +26,43 @@ Page({
    * 加载会员数据
    */
   loadMemberData: function () {
-    // 实际项目中，这里应该是从服务器获取数据
-    // 这里使用模拟数据
-    this.setData({
-      memberLevels: memberLevels,
-      // 模拟用户已是会员
-      memberInfo: memberInfo,
-      hasMember: true
+    // 加载会员等级列表
+    memberApi.getLevels().then(levels => {
+      this.setData({
+        memberLevels: levels
+      })
+      console.log('会员等级加载成功', levels)
+    }).catch(err => {
+      console.error('会员等级加载失败', err)
+      // 使用mock数据作为降级方案
+      this.setData({
+        memberLevels: memberLevels
+      })
+    })
+
+    // 加载当前会员信息
+    memberApi.getMemberInfo().then(data => {
+      if (data && data.id) {
+        // 用户已是会员
+        this.setData({
+          memberInfo: data,
+          hasMember: true
+        })
+        console.log('会员信息加载成功', data)
+      } else {
+        // 用户不是会员
+        this.setData({
+          memberInfo: null,
+          hasMember: false
+        })
+      }
+    }).catch(err => {
+      console.error('会员信息加载失败', err)
+      // 可能是未开通会员
+      this.setData({
+        memberInfo: null,
+        hasMember: false
+      })
     })
   },
 

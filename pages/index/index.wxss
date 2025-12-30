@@ -1,10 +1,29 @@
 /* pages/index/index.wxss */
 
-/* 轮播图样式 */
+/* 页面容器 */
+.page {
+  min-height: 100vh;
+  background-color: #F9FAFB;
+  padding-bottom: 32rpx;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* ========== 轮播图区域 ========== */
 .swiper-container {
   width: 100%;
-  height: 350rpx;
+  height: 300rpx;
   position: relative;
+  margin: 0;
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
 }
 
 .swiper {
@@ -22,122 +41,247 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 16rpx 20rpx;
+  background: linear-gradient(to top, rgba(30, 58, 138, 0.8) 0%, rgba(30, 58, 138, 0) 100%);
+  color: #FFFFFF;
+  padding: 16rpx 24rpx;
   font-size: 28rpx;
   line-height: 1.4;
 }
 
-/* 功能按钮区样式 */
-.function-container {
-  width: 100%;
-  background-color: #fff;
-  padding: 30rpx;
-  margin-top: 20rpx;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
-}
-
-.function-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 30rpx;
-  color: #333;
-}
-
-.function-grid {
+/* ========== 欢迎卡片 ========== */
+.welcome-card {
+  margin: 16rpx 20rpx;
+  padding: 20rpx 24rpx;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.function-item {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 20rpx;
+  gap: 16rpx;
 }
 
-.function-icon {
-  width: 100rpx;
-  height: 100rpx;
+.welcome-avatar {
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 16rpx;
+  flex-shrink: 0;
 }
 
-.function-icon text {
-  color: #fff;
-  font-size: 48rpx;
+.welcome-info {
+  flex: 1;
 }
 
-.function-name {
-  font-size: 28rpx;
-  color: #333;
+.welcome-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4rpx;
 }
 
-/* 最新资讯样式 */
-.news-container {
-  width: 100%;
-  background-color: #fff;
-  padding: 30rpx;
-  margin-top: 20rpx;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+.welcome-status {
+  font-size: 24rpx;
+  color: #F97316;
+}
+
+/* ========== 功能导航区域 ========== */
+.function-section {
+  margin: 0 20rpx 16rpx;
 }
 
 .section-title {
   font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 30rpx;
-  color: #333;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16rpx;
+}
+
+.function-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+}
+
+/* 功能卡片 */
+.function-card {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  min-height: 160rpx;
+  transition: all 0.2s;
+  border: 2rpx solid transparent;
+}
+
+.function-card:active {
+  transform: scale(0.98);
+}
+
+/* 会员专区 - 主操作，视觉最强 */
+.function-card-primary {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  box-shadow: 0 4rpx 16rpx rgba(249, 115, 22, 0.3);
+}
+
+.function-card-primary .function-icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.function-card-primary .function-title {
+  color: #FFFFFF;
+}
+
+.function-card-primary .function-desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 灰态卡片 */
+.function-card-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.function-icon-wrapper {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background-color: #F9FAFB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.function-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.function-content {
+  text-align: center;
+  width: 100%;
+}
+
+.function-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4rpx;
+}
+
+.function-desc {
+  font-size: 22rpx;
+  color: #6B7280;
+}
+
+/* ========== 最新赛事区域 ========== */
+.match-section {
+  margin: 0 20rpx 16rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.section-more {
+  font-size: 24rpx;
+  color: #6B7280;
+}
+
+.match-scroll {
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.match-list {
+  display: inline-flex;
+  gap: 12rpx;
+  padding-bottom: 8rpx;
+  padding-right: 20rpx;
+}
+
+.match-card {
+  display: inline-block;
+  width: 280rpx;
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.match-image {
+  width: 100%;
+  height: 160rpx;
+}
+
+.match-info {
+  padding: 16rpx;
+}
+
+.match-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.match-date {
+  font-size: 24rpx;
+  color: #9CA3AF;
+}
+
+/* ========== 最新资讯区域 ========== */
+.news-section {
+  margin: 0 20rpx;
 }
 
 .news-list {
-  width: 100%;
+  margin-top: 16rpx;
 }
 
 .news-item {
   display: flex;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #eee;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F3F4F6;
 }
 
 .news-item:last-child {
   border-bottom: none;
 }
 
-.news-image {
-  width: 160rpx;
-  height: 120rpx;
-  border-radius: 8rpx;
-  margin-right: 20rpx;
-}
-
-.news-info {
+.news-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  min-width: 0;
 }
 
 .news-title {
   font-size: 28rpx;
-  color: #333;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  color: #111827;
+  margin-bottom: 8rpx;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .news-date {
   font-size: 24rpx;
-  color: #999;
-  margin-top: 10rpx;
+  color: #9CA3AF;
 }
 
+.news-arrow {
+  font-size: 24rpx;
+  color: #9CA3AF;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}

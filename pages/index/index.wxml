@@ -1,67 +1,125 @@
 <!--pages/index/index.wxml-->
-<view class="container">
-  <!-- 顶部轮播图 -->
-  <view class="swiper-container">
-    <swiper 
-      indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}"
-      interval="{{interval}}"
-      duration="{{duration}}"
-      circular="{{circular}}"
-      class="swiper"
-    >
-      <block wx:for="{{swiperData}}" wx:key="id">
-        <swiper-item bindtap="onSwiperItemTap" data-id="{{item.id}}">
-          <image src="{{item.imageUrl}}" class="swiper-image" mode="aspectFill"></image>
-          <view class="swiper-title">{{item.title}}</view>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
+<view class="page {{showPage ? 'page-enter' : ''}}">
+  <view class="container">
+    
+    <!-- 轮播图 - 降低高度 -->
+    <view class="swiper-container">
+      <swiper 
+        indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        duration="{{duration}}"
+        circular="{{circular}}"
+        class="swiper"
+      >
+        <block wx:for="{{swiperData}}" wx:key="id">
+          <swiper-item bindtap="onSwiperItemTap" data-id="{{item.id}}">
+            <image src="{{item.imageUrl}}" class="swiper-image" mode="aspectFill"></image>
+            <view class="swiper-title">{{item.title}}</view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
 
-  <!-- 中间功能按钮区 -->
-  <view class="function-container">
-    <view class="function-title">功能导航</view>
-    <view class="function-grid">
-      <!-- 会员专区 -->
-      <view class="function-item" bindtap="onFunctionBtnTap" data-type="member">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-member"></text>
-        </view>
-        <view class="function-name">会员专区</view>
-      </view>
-      
-      <!-- 赛事报名 -->
-      <view class="function-item" bindtap="onFunctionBtnTap" data-type="match">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-match"></text>
-        </view>
-        <view class="function-name">赛事报名</view>
-      </view>
-      
-      <!-- 俱乐部申请 -->
-      <view class="function-item" bindtap="onFunctionBtnTap" data-type="club">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-club"></text>
-        </view>
-        <view class="function-name">俱乐部申请</view>
+    <!-- 欢迎区 - 简化为单行卡片 -->
+    <view class="welcome-card card list-item-enter list-item-delay-1">
+      <image class="welcome-avatar" src="/images/临时logo.png" mode="aspectFill"></image>
+      <view class="welcome-info">
+        <view class="welcome-name">欢迎回来</view>
+        <view class="welcome-status">普通会员</view>
       </view>
     </view>
-  </view>
 
-  <!-- 最新资讯 -->
-  <view class="news-container">
-    <view class="section-title">最新资讯</view>
-    <view class="news-list">
-      <block wx:for="{{swiperData}}" wx:key="id">
-        <view class="news-item" bindtap="onSwiperItemTap" data-id="{{item.id}}">
-          <image src="{{item.imageUrl}}" class="news-image" mode="aspectFill"></image>
-          <view class="news-info">
-            <view class="news-title">{{item.title}}</view>
-            <view class="news-date">2025-10-{{20 + index}}</view>
+    <!-- 功能导航 - 2×2 大卡片布局 -->
+    <view class="function-section">
+      <view class="section-title">功能导航</view>
+      <view class="function-grid">
+        
+        <!-- 会员专区 - 主操作，视觉最强 -->
+        <view class="function-card function-card-primary btn-press list-item-enter list-item-delay-2" bindtap="onFunctionBtnTap" data-type="member">
+          <view class="function-icon-wrapper">
+            <image src="/icon/会员专区.png" class="function-icon" mode="aspectFit"></image>
+          </view>
+          <view class="function-content">
+            <view class="function-title">会员专区</view>
+            <view class="function-desc">专享权益服务</view>
           </view>
         </view>
-      </block>
+
+        <!-- 赛事报名 -->
+        <view class="function-card btn-press list-item-enter list-item-delay-3" bindtap="onFunctionBtnTap" data-type="match">
+          <view class="function-icon-wrapper">
+            <image src="/icon/赛事报名.png" class="function-icon" mode="aspectFit"></image>
+          </view>
+          <view class="function-content">
+            <view class="function-title">赛事报名</view>
+            <view class="function-desc">查看最新赛事</view>
+          </view>
+        </view>
+
+        <!-- 俱乐部申请 -->
+        <view class="function-card btn-press list-item-enter list-item-delay-4" bindtap="onFunctionBtnTap" data-type="club">
+          <view class="function-icon-wrapper">
+            <image src="/icon/俱乐部申请.png" class="function-icon" mode="aspectFit"></image>
+          </view>
+          <view class="function-content">
+            <view class="function-title">俱乐部申请</view>
+            <view class="function-desc">加入我们</view>
+          </view>
+        </view>
+
+        <!-- 培训申请 - 灰态 -->
+        <view class="function-card function-card-disabled list-item-enter list-item-delay-5">
+          <view class="function-icon-wrapper">
+            <image src="/icon/培训申请.png" class="function-icon" mode="aspectFit"></image>
+          </view>
+          <view class="function-content">
+            <view class="function-title">培训申请</view>
+            <view class="function-desc">即将开放</view>
+          </view>
+        </view>
+
+      </view>
     </view>
+
+    <!-- 最新赛事 - 横向滑动 -->
+    <view class="match-section list-item-enter list-item-delay-6">
+      <view class="section-header">
+        <view class="section-title">最新赛事</view>
+        <view class="section-more" bindtap="onFunctionBtnTap" data-type="match">
+          查看更多 →
+        </view>
+      </view>
+      <scroll-view scroll-x class="match-scroll">
+        <view class="match-list">
+          <block wx:for="{{swiperData}}" wx:key="id" wx:if="{{index < 3}}">
+            <view class="match-card btn-press" bindtap="onSwiperItemTap" data-id="{{item.id}}">
+              <image src="{{item.imageUrl}}" class="match-image" mode="aspectFill"></image>
+              <view class="match-info">
+                <view class="match-title">{{item.title}}</view>
+                <view class="match-date">2025-12-{{20 + index}}</view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 最新资讯 - 精简为3条 -->
+    <view class="news-section card list-item-enter list-item-delay-7">
+      <view class="section-title">最新资讯</view>
+      <view class="news-list">
+        <block wx:for="{{swiperData}}" wx:key="id" wx:if="{{index < 3}}">
+          <view class="news-item btn-press" bindtap="onSwiperItemTap" data-id="{{item.id}}">
+            <view class="news-content">
+              <view class="news-title">{{item.title}}</view>
+              <view class="news-date">2025-12-{{20 + index}}</view>
+            </view>
+            <view class="news-arrow">→</view>
+          </view>
+        </block>
+      </view>
+    </view>
+
   </view>
 </view>

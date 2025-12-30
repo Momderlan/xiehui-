@@ -1,129 +1,92 @@
 <!--pages/personal/personal.wxml-->
-<view class="container">
-  <!-- 用户信息区域 -->
-  <view class="user-info-section">
-    <view class="user-avatar">
-      <image src="{{userInfo.avatar}}" class="avatar-image" mode="aspectFill"></image>
-    </view>
-    <view class="user-details">
-      <view class="user-name">{{userInfo.name}}</view>
-      <view class="user-phone">{{userInfo.phone}}</view>
-      <view class="user-member-level" style="color: {{themeColor}}">
-        {{userInfo.memberLevel}} ({{userInfo.points}}积分)
+<view class="page">
+  <view class="container">
+    
+    <!-- 用户信息卡片 -->
+    <view class="user-card card">
+      <image src="{{userInfo.avatar}}" class="user-avatar" mode="aspectFill"></image>
+      <view class="user-info">
+        <view class="user-name">{{userInfo.name}}</view>
+        <view class="user-level" style="color: {{themeColor}}">{{userInfo.memberLevel}}</view>
+        <view class="user-points">积分：{{userInfo.points}}</view>
       </view>
     </view>
-  </view>
 
-  <!-- 我的赛事 -->
-  <view class="my-section card">
-    <view class="section-header">
-      <view class="section-title">我的赛事</view>
-      <view class="section-more" bindtap="onFunctionTap" data-type="match">
-        <text>更多</text>
-        <text class="iconfont icon-arrow"></text>
+    <!-- 功能列表 -->
+    <view class="menu-card card">
+      <view class="menu-item" bindtap="onMyMatchTap">
+        <view class="menu-left">
+          <view class="menu-icon">📋</view>
+          <view class="menu-title">我的赛事</view>
+        </view>
+        <view class="menu-arrow">→</view>
+      </view>
+
+      <view class="menu-item" bindtap="onMyClubTap">
+        <view class="menu-left">
+          <view class="menu-icon">🏢</view>
+          <view class="menu-title">我的俱乐部</view>
+        </view>
+        <view class="menu-arrow">→</view>
+      </view>
+
+      <view class="menu-item" bindtap="onNotificationTap">
+        <view class="menu-left">
+          <view class="menu-icon">📢</view>
+          <view class="menu-title">官方通知</view>
+        </view>
+        <view class="menu-arrow">→</view>
       </view>
     </view>
-    <view class="section-content">
-      <block wx:if="{{myMatches && myMatches.length > 0}}">
-        <view class="match-list">
-          <view 
-            class="match-item" 
-            wx:for="{{myMatches}}" 
-            wx:key="id" 
-            bindtap="onMyMatchTap" 
-            data-id="{{item.id}}"
-          >
+
+    <!-- 退出登录按钮 -->
+    <view class="logout-card card">
+      <view class="logout-btn" bindtap="onLogout">
+        <view class="logout-icon">🚪</view>
+        <view class="logout-text">退出登录</view>
+      </view>
+    </view>
+
+    <!-- 我的赛事详情（可展开） -->
+    <view class="detail-card card" wx:if="{{myMatches && myMatches.length > 0}}">
+      <view class="card-title">我的赛事</view>
+      <view class="match-list">
+        <view 
+          class="match-item" 
+          wx:for="{{myMatches}}" 
+          wx:key="id" 
+          bindtap="onMyMatchTap" 
+          data-id="{{item.id}}"
+        >
+          <view class="match-main">
             <view class="match-title">{{item.title}}</view>
-            <view class="match-info">
-              <view class="match-date">{{item.date}}</view>
-              <view class="match-status">{{item.status}}</view>
+            <view class="match-meta">
+              <text class="match-date">{{item.date}}</text>
+              <view class="match-status status-tag status-tag-primary">{{item.status}}</view>
             </view>
-            <view class="match-category">{{item.category}}</view>
           </view>
         </view>
-      </block>
-      <view class="no-data" wx:else>
-        <text>暂无赛事报名</text>
       </view>
     </view>
-  </view>
 
-  <!-- 我的俱乐部 -->
-  <view class="my-section card">
-    <view class="section-header">
-      <view class="section-title">我的俱乐部</view>
-      <view class="section-more" bindtap="onFunctionTap" data-type="club">
-        <text>更多</text>
-        <text class="iconfont icon-arrow"></text>
-      </view>
-    </view>
-    <view class="section-content">
-      <block wx:if="{{myClub}}">
-        <view class="club-info">
-          <view class="club-name">{{myClub.name}}</view>
-          <view class="club-role">角色：{{myClub.role}}</view>
-          <view class="club-join-date">加入时间：{{myClub.joinDate}}</view>
+    <!-- 我的俱乐部详情 -->
+    <view class="detail-card card" wx:if="{{myClub}}">
+      <view class="card-title">我的俱乐部</view>
+      <view class="club-info">
+        <view class="info-row">
+          <text class="info-label">俱乐部名称</text>
+          <text class="info-value">{{myClub.name}}</text>
         </view>
-      </block>
-      <view class="no-data" wx:else>
-        <text>暂未加入俱乐部</text>
+        <view class="info-row">
+          <text class="info-label">我的角色</text>
+          <text class="info-value">{{myClub.role}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">加入时间</text>
+          <text class="info-value">{{myClub.joinDate}}</text>
+        </view>
       </view>
     </view>
-  </view>
 
-  <!-- 功能列表 -->
-  <view class="function-section card">
-    <view class="section-title">功能列表</view>
-    <view class="function-list">
-      <view class="function-item" bindtap="onFunctionTap" data-type="member">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-member"></text>
-        </view>
-        <view class="function-text">会员中心</view>
-        <view class="function-arrow">
-          <text class="iconfont icon-arrow"></text>
-        </view>
-      </view>
-      
-      <view class="function-item" bindtap="onFunctionTap" data-type="match">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-match"></text>
-        </view>
-        <view class="function-text">赛事报名</view>
-        <view class="function-arrow">
-          <text class="iconfont icon-arrow"></text>
-        </view>
-      </view>
-      
-      <view class="function-item" bindtap="onFunctionTap" data-type="club">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-club"></text>
-        </view>
-        <view class="function-text">俱乐部</view>
-        <view class="function-arrow">
-          <text class="iconfont icon-arrow"></text>
-        </view>
-      </view>
-      
-      <view class="function-item" bindtap="onFunctionTap" data-type="notification">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-notification"></text>
-        </view>
-        <view class="function-text">官方通知</view>
-        <view class="function-arrow">
-          <text class="iconfont icon-arrow"></text>
-        </view>
-      </view>
-      
-      <view class="function-item" bindtap="onFunctionTap" data-type="setting">
-        <view class="function-icon theme-bg">
-          <text class="iconfont icon-setting"></text>
-        </view>
-        <view class="function-text">设置</view>
-        <view class="function-arrow">
-          <text class="iconfont icon-arrow"></text>
-        </view>
-      </view>
-    </view>
   </view>
 </view>

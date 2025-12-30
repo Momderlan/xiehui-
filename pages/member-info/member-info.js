@@ -1,7 +1,8 @@
 // pages/member-info/member-info.js
 const app = getApp()
-const { memberInfo } = require('../../utils/mock')
+const { memberInfo, memberLevels } = require('../../utils/mock')
 const util = require('../../utils/util')
+const { memberApi } = require('../../utils/api')
 
 Page({
   /**
@@ -9,7 +10,12 @@ Page({
    */
   data: {
     memberInfo: null, // 会员信息
-    themeColor: app.globalData.themeColor // 主题色
+    memberRecords: [], // 会员购买记录
+    themeColor: app.globalData.themeColor, // 主题色
+    page: 1, // 当前页码
+    size: 10, // 每页数量
+    hasMore: true, // 是否还有更多数据
+    loading: false // 是否正在加载
   },
 
   /**
@@ -23,10 +29,64 @@ Page({
    * 加载会员信息
    */
   loadMemberInfo: function () {
-    // 实际项目中，这里应该是从服务器获取数据
-    // 这里使用模拟数据
-    this.setData({
-      memberInfo: memberInfo
+    // 加载当前会员信息
+    memberApi.getMemberInfo().then(data => {
+      this.setData({
+        memberInfo: data
+      })
+      console.log('会员信息加载成功', data)
+    }).catch(err => {
+      console.error('会员信息加载失败', err)
+      // 使用mock数据作为降级方案
+      this.setData({
+        memberInfo: memberInfo
+      })
+    })
+
+    // 加载会员购买记录
+    this.loadMemberRecords()
+  },
+
+  /**
+   * 加载会员购买记录
+   */
+  loadMemberRecords: function(isRefresh = false) {
+    // 如果是刷新，重置页码
+    if (isRefresh) {
+      this.setData({
+        page: 1,
+        memberRecords: [],
+        hasMore: true
+      })
+    }
+
+    // 如果正在加载或没有更多数据，则返回
+    if (this.data.loading || !this.data.hasMore) {
+      return
+    }
+
+    this.setData({ loading: true })
+
+    memberApi.getRecords({
+      page: this.data.page,
+      size: this.data.size
+    }).then(data => {
+      const { records, total, current } = data
+      
+      // 合并数据
+      const newList = isRefresh ? records : [...this.data.memberRecords, ...records]
+      
+      this.setData({
+        memberRecords: newList,
+        page: current + 1,
+        hasMore: newList.length < total,
+        loading: false
+      })
+
+      console.log('会员购买记录加载成功', records)
+    }).catch(err => {
+      console.error('会员购买记录加载失败', err)
+      this.setData({ loading: false })
     })
   },
 
@@ -71,14 +131,18 @@ Page({
   onPullDownRefresh: function () {
     // 下拉刷新，重新加载数据
     this.loadMemberInfo()
-    wx.stopPullDownRefresh()
+    this.loadMemberRecords(true)
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    // 加载更多记录
+    this.loadMemberRecords(false)
   },
 
   /**
