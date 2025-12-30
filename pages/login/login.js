@@ -7,9 +7,17 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoginMode: true, // true为登录模式，false为注册模式
     loginForm: {
       username: '',
       password: ''
+    },
+    registerForm: {
+      username: '',
+      password: '',
+      confirmPassword: '',
+      phone: '',
+      realName: ''
     }
   },
 
@@ -177,6 +185,110 @@ Page({
           icon: 'none'
         })
       }
+    })
+  },
+
+  /**
+   * 切换登录/注册模式
+   */
+  toggleMode() {
+    this.setData({
+      isLoginMode: !this.data.isLoginMode
+    })
+  },
+
+  /**
+   * 注册表单输入
+   */
+  onRegisterInput(e) {
+    const { field } = e.currentTarget.dataset
+    this.setData({
+      [`registerForm.${field}`]: e.detail.value
+    })
+  },
+
+  /**
+   * 用户注册
+   */
+  onRegister() {
+    const { username, password, confirmPassword, phone } = this.data.registerForm
+
+    // 表单验证
+    if (!username.trim() || username.length < 3) {
+      wx.showToast({
+        title: '用户名至少3个字符',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!password || password.length < 6) {
+      wx.showToast({
+        title: '密码至少6个字符',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (password !== confirmPassword) {
+      wx.showToast({
+        title: '两次密码输入不一致',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (phone && !/^1[3-9]\d{9}$/.test(phone)) {
+      wx.showToast({
+        title: '手机号格式不正确',
+        icon: 'none'
+      })
+      return
+    }
+
+    wx.showLoading({
+      title: '注册中...',
+      mask: true
+    })
+
+    const registerData = {
+      username: username.trim(),
+      password: password
+    }
+
+    // 只有当手机号不为空时才添加到注册数据中
+    if (phone) {
+      registerData.phone = phone
+    }
+
+    authApi.register(registerData).then(data => {
+      wx.hideLoading()
+      
+      // 保存token和用户信息
+      wx.setStorageSync('token', data.token)
+      if (data.userId) {
+        wx.setStorageSync('userId', data.userId)
+      }
+      
+      wx.showToast({
+        title: '注册成功',
+        icon: 'success',
+        duration: 1500
+      })
+
+      // 延迟跳转到个人中心
+      setTimeout(() => {
+        wx.switchTab({
+          url: '/pages/personal/personal'
+        })
+      }, 1500)
+    }).catch(err => {
+      wx.hideLoading()
+      console.error('注册失败', err)
+      wx.showToast({
+        title: err.message || '注册失败',
+        icon: 'none'
+      })
     })
   }
 })

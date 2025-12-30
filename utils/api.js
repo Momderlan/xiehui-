@@ -8,6 +8,9 @@ const authApi = {
   // 账号密码登录
   login: (data) => post('/api/app/auth/login', data, { needAuth: false }),
   
+  // 用户注册
+  register: (data) => post('/api/app/auth/register', data, { needAuth: false }),
+  
   // 微信登录（保留）
   wechatLogin: (data) => post('/api/app/auth/wechat-login', data, { needAuth: false }),
   
