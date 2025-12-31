@@ -3,7 +3,7 @@
   <!-- Logo区域 -->
   <view class="logo-section">
     <image class="logo" src="/images/临时logo.png" mode="aspectFit"></image>
-    <text class="app-name">乒乓球协会</text>
+    <text class="app-name">xxxx协会</text>
   </view>
 
   <!-- 登录表单 -->
